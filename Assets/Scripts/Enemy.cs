@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _enemyPrefab;
-
     // Update is called once per frame
     void Update()
     {

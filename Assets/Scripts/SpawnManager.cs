@@ -10,10 +10,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private Transform _enemyEyeballPrefab;
 
-     private bool isRunning;
+     private bool _stopSpawning;
     void Start()
     {
-        isRunning = true;
+        _stopSpawning = false;
         StartCoroutine(SpawnEnemy());
     }
 
@@ -23,20 +23,20 @@ public class SpawnManager : MonoBehaviour
     {
                    
     }
-
+    public void playerIsDead()
+    {
+        _stopSpawning = true;
+    }
     IEnumerator SpawnEnemy()
     {
         //While Loop
-        while(isRunning)
+        while(_stopSpawning == false)
         {
             float randomX = Random.Range(-9.5f,9.5f);
             //instantiate enemy eyeball prefab
             Instantiate(_enemyEyeballPrefab,new Vector3(randomX,7.5f,0),Quaternion.identity,_enemyManager);
             //yield new wait for 5 sec
             yield return new WaitForSeconds(2f);
-        }
-
-    
-    
+        }    
     }
 }

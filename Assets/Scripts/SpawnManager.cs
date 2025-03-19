@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -9,34 +10,42 @@ public class SpawnManager : MonoBehaviour
     [Header("Enemies")]
     [SerializeField]
     private Transform _enemyEyeballPrefab;
+    [SerializeField]
+    private Vector2 _spawnRange;
 
-     private bool _stopSpawning;
+
+     private bool _stopSpawning = false;
     void Start()
     {
-        _stopSpawning = false;
         StartCoroutine(SpawnEnemy());
     }
 
-    
-    // Update is called once per frame
-    void Update()
-    {
-                   
-    }
     public void playerIsDead()
     {
         _stopSpawning = true;
+        StartCoroutine(DestroyAllEnemiesRoutine());
     }
     IEnumerator SpawnEnemy()
     {
         //While Loop
         while(_stopSpawning == false)
         {
-            float randomX = Random.Range(-9.5f,9.5f);
+            float randomX = Random.Range(_spawnRange.x,_spawnRange.y);
             //instantiate enemy eyeball prefab
-            Instantiate(_enemyEyeballPrefab,new Vector3(randomX,7.5f,0),Quaternion.identity,_enemyManager);
+            Instantiate(_enemyEyeballPrefab,new Vector3(randomX,7.3f,0),Quaternion.identity,_enemyManager);
             //yield new wait for 5 sec
             yield return new WaitForSeconds(2f);
         }    
+    }
+
+    IEnumerator DestroyAllEnemiesRoutine()
+    {
+        GameObject[] _enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        yield return new WaitForSeconds(2f);
+        foreach (GameObject _enemy in _enemies)
+        {
+            Destroy(_enemy);
+        }
     }
 }

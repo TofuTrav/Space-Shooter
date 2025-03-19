@@ -13,14 +13,14 @@ public class Player : MonoBehaviour
 
     [Header("Player Bounds")]
     [SerializeField]
-    private float _topBounds = 11.4f;
+    private float _topBounds = 5f;
     [SerializeField]
-    private float _bottomBounds = -11.4f;
+    private float _bottomBounds = -3.8f;
     [SerializeField]
-    private float _leftBounds = -3.8f;
+    private float _leftBounds = 11.4f;
     [SerializeField]
-    private float _rightBounds = 5f;
-
+    private float _rightBounds = -11.4f;
+    
     [Header("Laser Stats")]
     [SerializeField]
     private GameObject _laserPrefab;
@@ -28,12 +28,21 @@ public class Player : MonoBehaviour
     private Transform _projectileManager;
     private SpawnManager _spawnManager;
    
+   [SerializeField]
+   private Transform _shield;
+   [SerializeField]
+   private bool _isShieldActive = false;
+   private int _currentShieldHealth = 3;
+   [SerializeField] 
+   private int _maxShieldHealth = 3;
     
 
     void Start()
     {
         transform.position = new Vector3(0,0,0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _shield.gameObject.SetActive(false);
+        
         if(_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager Is NULL");
@@ -45,6 +54,11 @@ public class Player : MonoBehaviour
         MovePlayer();
         SetBounds();
         FireLaser();
+
+        if(_isShieldActive)
+        {
+            ActivateShield(true);
+        }
     }
 
     public void Damage()
@@ -67,22 +81,22 @@ public class Player : MonoBehaviour
 
     private void SetBounds()
     {
-        if(transform.position.y >= 5)
+        if(transform.position.y >= _topBounds)
         {
-            transform.position = new Vector3(transform.position.x, _rightBounds, 0);
+            transform.position = new Vector3(transform.position.x, _topBounds, 0);
         }
-        else if(transform.position.y <= -3.8f)
+        else if(transform.position.y <= _bottomBounds)
         {
-            transform.position = new Vector3(transform.position.x, _leftBounds, 0);
+            transform.position = new Vector3(transform.position.x, _bottomBounds, 0);
         }
 
-        if(transform.position.x >= 11.4f)
+        if(transform.position.x >= _rightBounds)
         {
-            transform.position = new Vector3(_bottomBounds, transform.position.y, 0);
+            transform.position = new Vector3(_rightBounds, transform.position.y, 0);
         }
-        else if(transform.position.x <= -11.4f)
+        else if(transform.position.x <= _leftBounds)
         {
-            transform.position = new Vector3(_topBounds, transform.position.y, 0);
+            transform.position = new Vector3(_leftBounds, transform.position.y, 0);
         }
     }
     
@@ -93,5 +107,12 @@ public class Player : MonoBehaviour
             _canFire = Time.time + _fireRate;
             Laser.Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + .8f, 0), Quaternion.identity, _projectileManager);
         }
+    }
+
+    public void ActivateShield(bool isActive)
+    {
+        _shield.gameObject.SetActive(isActive);
+        _isShieldActive = isActive;
+        _currentShieldHealth = _maxShieldHealth;
     }
 }

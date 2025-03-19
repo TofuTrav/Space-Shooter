@@ -19,12 +19,14 @@ public class Enemy : MonoBehaviour
         //if at bottom of screen respawn at top of screen in a random x position
         if(transform.position.y <= -5.6f)
         {
-            transform.position = new Vector3(Random.Range(-9.1f,9.1f),7.6f,0);
+            transform.position = new Vector3(Random.Range(-8.3f,8.3f),7.3f,0);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("The Enemy Ran Into Something!");
+        
         if(other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();

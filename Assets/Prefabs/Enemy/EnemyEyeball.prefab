@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3c0edc13d464160a60434a72c2fe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 4
+  _bottomBounds: -5.6
+  _topBounds: 7.3
+  _spawnRange: {x: -8.3, y: 8.3}
 --- !u!54 &-1431014260637425950
 Rigidbody:
   m_ObjectHideFlags: 0

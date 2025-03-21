@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     
-    // Update is called once per frame
+    [SerializeField]
+    private float _speed = 4;
+    [SerializeField]
+    private float _bottomBounds = -5.6f;
+    [SerializeField]
+    private float _topBounds = 7.3f;
+    [SerializeField]
+    private Vector2 _spawnRange;
+    
     void Update()
     {
         EnemyMovement();
@@ -14,12 +19,13 @@ public class Enemy : MonoBehaviour
 
     private void EnemyMovement()
     {
-        transform.Translate(Vector3.down * 4 * Time.deltaTime);
-
-        //if at bottom of screen respawn at top of screen in a random x position
-        if(transform.position.y <= -5.6f)
+        transform.Translate(Vector3.down * (_speed * Time.deltaTime));
+        
+        float randomX = Random.Range(_spawnRange.x,_spawnRange.y);
+      
+        if(transform.position.y <= _bottomBounds)
         {
-            transform.position = new Vector3(Random.Range(-8.3f,8.3f),7.3f,0);
+            transform.position = new Vector3(randomX,_topBounds,0);
         }
     }
 

@@ -4,40 +4,63 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _enemyManager;
-
     [Header("Enemies")]
+    [SerializeField]
+    private Vector2 _enemySpawnXRange;
+    [SerializeField]
+    private float _enemySpawnY = 7.3f;
     [SerializeField]
     private Transform _enemyEyeballPrefab;
     [SerializeField]
-    private Vector2 _spawnRange;
+    private Transform _enemyContainer;
 
-
-     private bool _stopSpawning = false;
+    [Header("Powerups")]
+    [SerializeField]
+    private Vector2 _powerupSpawnXRange;
+    [SerializeField]
+    private float _powerupSpawnY = 7.3f;
+    [SerializeField]
+    private Vector2 _powerupSpawnTimer;
+    [SerializeField]
+    private Transform _tripleShotPrefab;
+    [SerializeField]
+    private Transform _powerupContainer;
+    private bool _stopSpawning = false;
+    [SerializeField]
+    private GameObject[] _powerupPrefabs;
     void Start()
     {
         StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnPowerupRoutine());
     }
+    IEnumerator SpawnEnemy()
+    {
+        while(_stopSpawning == false)
+        {
+            float _enemySpawnX = Random.Range(_enemySpawnXRange.x,_enemySpawnXRange.y);
 
+            Instantiate(_enemyEyeballPrefab,new Vector3(_enemySpawnX,_enemySpawnY,0),Quaternion.identity,_enemyContainer);
+            yield return new WaitForSeconds(2f);
+        }    
+    }
+    IEnumerator SpawnPowerupRoutine()
+    {
+        float _powerupSpawnX = Random.Range(_powerupSpawnXRange.x,_powerupSpawnXRange.y);
+        float _timeBetweenSpawn = Random.Range(_powerupSpawnTimer.x,_powerupSpawnTimer.y);
+        int randomPowerup = Random.Range(0,_powerupPrefabs.Length);
+
+        while(_stopSpawning == false)
+        {
+            Debug.Log("Stop Spawning is false!");
+            Instantiate(_powerupPrefabs[randomPowerup],new Vector3(_powerupSpawnX,_powerupSpawnY,0),Quaternion.identity,_powerupContainer);
+            yield return new WaitForSeconds(_timeBetweenSpawn);
+        }
+    }
     public void playerIsDead()
     {
         _stopSpawning = true;
         StartCoroutine(DestroyAllEnemiesRoutine());
     }
-    IEnumerator SpawnEnemy()
-    {
-        //While Loop
-        while(_stopSpawning == false)
-        {
-            float randomX = Random.Range(_spawnRange.x,_spawnRange.y);
-            //instantiate enemy eyeball prefab
-            Instantiate(_enemyEyeballPrefab,new Vector3(randomX,7.3f,0),Quaternion.identity,_enemyManager);
-            //yield new wait for 5 sec
-            yield return new WaitForSeconds(2f);
-        }    
-    }
-
     IEnumerator DestroyAllEnemiesRoutine()
     {
         GameObject[] _enemies = GameObject.FindGameObjectsWithTag("Enemy");

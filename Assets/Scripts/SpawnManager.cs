@@ -22,8 +22,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private Vector2 _powerupSpawnTimer;
     [SerializeField]
-    private Transform _tripleShotPrefab;
-    [SerializeField]
     private Transform _powerupContainer;
     private bool _stopSpawning = false;
     [SerializeField]
@@ -51,7 +49,6 @@ public class SpawnManager : MonoBehaviour
             float _timeBetweenSpawn = Random.Range(_powerupSpawnTimer.x,_powerupSpawnTimer.y);
             int randomPowerup = Random.Range(0,_powerupPrefabs.Length);
             
-            Debug.Log("Stop Spawning is false!");
             Instantiate(_powerupPrefabs[randomPowerup],new Vector3(_powerupSpawnX,_powerupSpawnY,0),Quaternion.identity,_powerupContainer);
             yield return new WaitForSeconds(_timeBetweenSpawn);
         }

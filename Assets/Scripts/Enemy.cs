@@ -11,7 +11,13 @@ public class Enemy : MonoBehaviour
     private float _topBounds = 7.3f;
     [SerializeField]
     private Vector2 _spawnRange;
-    
+    [SerializeField]
+    private Transform _player;
+
+    [Header("Enemies")]
+    [SerializeField]
+    private EnemyID _enemyID; 
+
     void Update()
     {
         EnemyMovement();
@@ -31,15 +37,12 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("The Enemy Ran Into Something!");
-        
         if(other.tag == "Player")
-        {
+        {   
             Player player = other.transform.GetComponent<Player>();
             
             if(player != null)
             {
-                //Debug.Log($"true or false the shield is active? {player._isShieldActive}");
                 player.Damage();
             }
             
@@ -47,20 +50,26 @@ public class Enemy : MonoBehaviour
         }
 
         if(other.tag == "Laser")
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
-        }
-
-        //if(other.tag == "Shield")
-        //{
-            //Player player = other.transform.GetComponentInParent<Player>();
+        {   
+            Player player = _player.transform.GetComponent<Player>();
             
-            //if(player != null)
-            //{
-                //Debug.Log("The enemy has hit my shield!");
-                //player.Damage();
-            //}
-        //}
+            if(player == null)
+            {
+                Debug.Log("i don't have the script!");
+                return;
+            }
+            
+            Destroy(other.gameObject);
+
+            switch(_enemyID)
+            {
+                case EnemyID.Eyeball:
+                player.addPointsForEyeballDestroyed();
+                Destroy(this.gameObject);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

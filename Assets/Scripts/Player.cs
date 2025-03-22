@@ -13,8 +13,6 @@ public class Player : MonoBehaviour
     private float _canFire = -1;
     [SerializeField]
     private int _lives = 3;
-    [SerializeField]
-    private float _speedBoostMultiplier = 2;
 
     [Header("Player Bounds")]
     [SerializeField]
@@ -34,13 +32,26 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform _projectileContainer;
    
-   [Header("Shield Stats")]
-   [SerializeField]
-   private Transform _shield;
-   private bool _isShieldActive = false;
-   private int _currentShieldHealth = 3;
-   [SerializeField] 
-   private int _maxShieldHealth = 3;
+    [Header("Shield Stats")]
+    [SerializeField]
+    private Transform _shield;
+    [SerializeField] 
+    private int _maxShieldHealth = 3;
+    private int _currentShieldHealth = 3;
+    private bool _isShieldActive = false;
+
+    [Header("Speed Booster Stats")]
+    [SerializeField]
+    private float _speedBoostMultiplier = 2;
+    [SerializeField]
+    private Transform _thrusterVisual;
+
+    [Header("Score Info")]
+    private Transform _uIManager;
+    [SerializeField]
+    private int _score;
+    [SerializeField]
+    private int _pointsForKillingEyeball = 10;
 
    private bool _isTripleShotActive = false;
    private Coroutine _tripleShotTimerRoutine;
@@ -53,12 +64,13 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0,0,0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        //_shield.gameObject.SetActive(false);
+        _shield.gameObject.SetActive(false);
         
         if(_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager Is NULL");
         }
+        
     }
    
     void Update()
@@ -69,7 +81,7 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
-        } 
+        }
     }
 
     private void SetBounds()
@@ -148,21 +160,11 @@ public class Player : MonoBehaviour
         _currentShieldHealth = _maxShieldHealth;
         _isShieldActive = isActive;
     }
-   
-   // public void ActivateShield(bool isActive)
-    //{
-    //    _shield.gameObject.SetActive(isActive);
-    //    Debug.Log("The transform position of the shield is" + _shield.transform.position);
-    //    _isShieldActive = isActive;
-    //    _currentShieldHealth = _maxShieldHealth;
-    //}
 
     public void DamageShield()
     {
-        Debug.Log("the current shield health is" + _currentShieldHealth);
         _currentShieldHealth --;
-        Debug.Log("the current shield health is" + _currentShieldHealth);
-    
+
         if(_currentShieldHealth < 1)
         {
             _shield.gameObject.SetActive(false);
@@ -207,17 +209,38 @@ public class Player : MonoBehaviour
             StopCoroutine(_speedBoosterTimerRoutine);
             _speedBoosterTimerRoutine = StartCoroutine(SpeedBoosterPowerDownRoutine());
         }
-        
-        
-        //if speed is already boosted
-        //stop that boost
-        StartCoroutine(SpeedBoosterPowerDownRoutine());
     }
 
     IEnumerator SpeedBoosterPowerDownRoutine()
     {
+        _thrusterVisual.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         _isSpeedBoosterActive = false;
         _speedBoosterTimerRoutine = null;
+        _thrusterVisual.gameObject.SetActive(false);
     }
+
+    public void addPointsForEyeballDestroyed()
+    {
+        
+        _uIManager = FindObjectOfType<UIManager>()?.transform;
+        
+        if (_uIManager == null)
+        {
+            Debug.LogError("UI Manager not found in scene!");
+        }
+        
+        UIManager uIManager = _uIManager.GetComponent<UIManager>();
+
+        if(uIManager == null)
+        {
+            Debug.Log("UI Manager component not found!");
+            return;
+        }
+        
+        _score += _pointsForKillingEyeball;
+        uIManager.UpdateScore(_score);
+    }
+
+    
 }

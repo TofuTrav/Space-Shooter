@@ -5,3 +5,8 @@
     SpeedBooster,
     Shield
 }
+
+public enum EnemyID
+{
+    Eyeball
+}

@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
             
             if(player != null)
             {
+                //Debug.Log($"true or false the shield is active? {player._isShieldActive}");
                 player.Damage();
             }
             
@@ -50,5 +51,16 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
+
+        //if(other.tag == "Shield")
+        //{
+            //Player player = other.transform.GetComponentInParent<Player>();
+            
+            //if(player != null)
+            //{
+                //Debug.Log("The enemy has hit my shield!");
+                //player.Damage();
+            //}
+        //}
     }
 }

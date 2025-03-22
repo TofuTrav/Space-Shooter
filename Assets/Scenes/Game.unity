@@ -491,6 +491,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2073678524}
   - component: {fileID: 2073678525}
+  - component: {fileID: 2073678527}
+  - component: {fileID: 2073678526}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -524,86 +526,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d670af7b81e4fd5b734780847b2a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawnXRange: {x: 0, y: 0}
+  _enemySpawnXRange: {x: -8.4, y: 8.4}
   _enemySpawnY: 7.3
   _enemyEyeballPrefab: {fileID: 3913609008114973032, guid: a741d59a76d04407d9fc5e32cece6760,
     type: 3}
   _enemyContainer: {fileID: 2073678524}
-  _powerupSpawnXRange: {x: 0, y: 0}
+  _powerupSpawnXRange: {x: -8.4, y: 8.4}
   _powerupSpawnY: 7.3
-  _powerupSpawnTimer: {x: 0, y: 0}
+  _powerupSpawnTimer: {x: 3, y: 7}
   _tripleShotPrefab: {fileID: 32570739550044377, guid: 479e9b5745fdf431c940431190eb3c54,
     type: 3}
   _powerupContainer: {fileID: 2073678524}
   _powerupPrefabs:
   - {fileID: 32570739550044390, guid: 479e9b5745fdf431c940431190eb3c54, type: 3}
   - {fileID: 2118672098571312973, guid: 259b10b97ba124518ae91f4e7853667c, type: 3}
---- !u!1001 &2118672098107106156
-PrefabInstance:
+  - {fileID: 2626177086561711145, guid: 93994407798294b48a7cd40c1d9f64b0, type: 3}
+--- !u!212 &2073678526
+SpriteRenderer:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312971, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2118672098571312973, guid: 259b10b97ba124518ae91f4e7853667c,
-        type: 3}
-      propertyPath: m_Name
-      value: Speed_Booster_Powerup
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 259b10b97ba124518ae91f4e7853667c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073678523}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &2073678527
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073678523}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9701ff476865e46528a71605afc70fac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

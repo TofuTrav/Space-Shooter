@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2118672098571312973
+--- !u!1 &2626177086561711145
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2118672098571312971}
-  - component: {fileID: 2118672098571312970}
-  - component: {fileID: 2118672098571312969}
-  - component: {fileID: 2118672098571312968}
-  - component: {fileID: 2118672098571312975}
-  - component: {fileID: 2118672098571312974}
+  - component: {fileID: 2574068688847067996}
+  - component: {fileID: 1592139131401052748}
+  - component: {fileID: 2601437750976013245}
+  - component: {fileID: 2966340101695955760}
+  - component: {fileID: 6427995229199624586}
+  - component: {fileID: 7204196503394521376}
   m_Layer: 0
-  m_Name: Speed_Booster_Powerup
+  m_Name: Shield_Powerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2118672098571312971
+--- !u!4 &2574068688847067996
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
+  m_GameObject: {fileID: 2626177086561711145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3250369, y: 0.3250369, z: 0.3250369}
@@ -35,13 +35,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2118672098571312970
+--- !u!212 &1592139131401052748
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
+  m_GameObject: {fileID: 2626177086561711145}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b8849e8703cd2a48856f693a7ce5940, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2f5f1638e62545a09c5d6e6d3643101, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,13 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!54 &2118672098571312969
+--- !u!65 &2601437750976013245
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626177086561711145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7435749, y: 2.9123366, z: 0.19999999}
+  m_Center: {x: -0.00000041260068, y: 0.5064638, z: 0}
+--- !u!54 &2966340101695955760
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
+  m_GameObject: {fileID: 2626177086561711145}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,26 +114,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2118672098571312968
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.12, y: 5.12, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2118672098571312975
+--- !u!114 &6427995229199624586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
+  m_GameObject: {fileID: 2626177086561711145}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e0a0b835d8bb47a3aa5d09110b06472, type: 3}
@@ -128,18 +128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _bottomBounds: -4.9
-  _powerupID: 2
---- !u!95 &2118672098571312974
+  _powerupID: 3
+--- !u!95 &7204196503394521376
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118672098571312973}
+  m_GameObject: {fileID: 2626177086561711145}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5d874063eb0b44fa8b6b8a69bfe4afc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3ea25604e806c45248a1336542f1de3f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

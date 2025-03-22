@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
    [Header("Shield Stats")]
    [SerializeField]
    private Transform _shield;
-   [SerializeField]
    private bool _isShieldActive = false;
    private int _currentShieldHealth = 3;
    [SerializeField] 
@@ -54,7 +53,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0,0,0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        _shield.gameObject.SetActive(false);
+        //_shield.gameObject.SetActive(false);
         
         if(_spawnManager == null)
         {
@@ -70,13 +69,7 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
-        }
-        
-        if(_isShieldActive)
-        {
-            ActivateShield(true);
-        }
-         
+        } 
     }
 
     private void SetBounds()
@@ -130,15 +123,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ActivateShield(bool isActive)
-    {
-        _shield.gameObject.SetActive(isActive);
-        _isShieldActive = isActive;
-        _currentShieldHealth = _maxShieldHealth;
-    }
     public void Damage()
     {
-        _lives --;
+        if(_isShieldActive)
+        {
+            DamageShield();
+            return;
+        }
+        else
+        {
+            _lives --;
+        }
         
         if(_lives < 1)
         {
@@ -146,6 +141,35 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    
+    public void ActivateShield(bool isActive)
+    {
+        _shield.gameObject.SetActive(isActive);
+        _currentShieldHealth = _maxShieldHealth;
+        _isShieldActive = isActive;
+    }
+   
+   // public void ActivateShield(bool isActive)
+    //{
+    //    _shield.gameObject.SetActive(isActive);
+    //    Debug.Log("The transform position of the shield is" + _shield.transform.position);
+    //    _isShieldActive = isActive;
+    //    _currentShieldHealth = _maxShieldHealth;
+    //}
+
+    public void DamageShield()
+    {
+        Debug.Log("the current shield health is" + _currentShieldHealth);
+        _currentShieldHealth --;
+        Debug.Log("the current shield health is" + _currentShieldHealth);
+    
+        if(_currentShieldHealth < 1)
+        {
+            _shield.gameObject.SetActive(false);
+            _isShieldActive = false;
+        }
+    }
+    
 
     public void ActivateTripleShot()
     {

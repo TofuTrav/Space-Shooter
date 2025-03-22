@@ -45,12 +45,12 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnPowerupRoutine()
     {
-        float _powerupSpawnX = Random.Range(_powerupSpawnXRange.x,_powerupSpawnXRange.y);
-        float _timeBetweenSpawn = Random.Range(_powerupSpawnTimer.x,_powerupSpawnTimer.y);
-        int randomPowerup = Random.Range(0,_powerupPrefabs.Length);
-
         while(_stopSpawning == false)
         {
+            float _powerupSpawnX = Random.Range(_powerupSpawnXRange.x,_powerupSpawnXRange.y);
+            float _timeBetweenSpawn = Random.Range(_powerupSpawnTimer.x,_powerupSpawnTimer.y);
+            int randomPowerup = Random.Range(0,_powerupPrefabs.Length);
+            
             Debug.Log("Stop Spawning is false!");
             Instantiate(_powerupPrefabs[randomPowerup],new Vector3(_powerupSpawnX,_powerupSpawnY,0),Quaternion.identity,_powerupContainer);
             yield return new WaitForSeconds(_timeBetweenSpawn);

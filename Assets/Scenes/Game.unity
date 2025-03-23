@@ -165,6 +165,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &550153385 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8965394563845222983, guid: 3aac1acea985947d99b4a7b321180a90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691399139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,9 +647,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8965394562673716586, guid: 3aac1acea985947d99b4a7b321180a90,
         type: 3}
+      propertyPath: _lives
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965394562673716586, guid: 3aac1acea985947d99b4a7b321180a90,
+        type: 3}
       propertyPath: _uIManager
       value: 
       objectReference: {fileID: 208311178}
+    - target: {fileID: 8965394562673716586, guid: 3aac1acea985947d99b4a7b321180a90,
+        type: 3}
+      propertyPath: _shieldVisual
+      value: 
+      objectReference: {fileID: 550153385}
     - target: {fileID: 8965394562673716586, guid: 3aac1acea985947d99b4a7b321180a90,
         type: 3}
       propertyPath: _projectileContainer

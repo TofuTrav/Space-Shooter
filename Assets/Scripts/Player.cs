@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     [Header("Shield Stats")]
     [SerializeField]
     private Transform _shield;
+    [SerializeField]
+    private SpriteRenderer _shieldVisual;
     [SerializeField] 
     private int _maxShieldHealth = 3;
     private int _currentShieldHealth = 3;
@@ -47,16 +49,15 @@ public class Player : MonoBehaviour
     private Transform _thrusterVisual;
 
     [Header("Score Info")]
-    private Transform _uIManager;
+    //private Transform _uIManager;
     [SerializeField]
     private int _score;
-    [SerializeField]
-    private int _pointsForKillingEyeball = 10;
 
    private bool _isTripleShotActive = false;
    private Coroutine _tripleShotTimerRoutine;
    private bool _isSpeedBoosterActive = false;
    private Coroutine _speedBoosterTimerRoutine;
+   private UIManager _uIManager;
 
     
 
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0,0,0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _shield.gameObject.SetActive(false);
+        _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         
         if(_spawnManager == null)
         {
@@ -157,6 +159,7 @@ public class Player : MonoBehaviour
     public void ActivateShield(bool isActive)
     {
         _shield.gameObject.SetActive(isActive);
+        _shieldVisual.color = Color.white;
         _currentShieldHealth = _maxShieldHealth;
         _isShieldActive = isActive;
     }
@@ -220,26 +223,16 @@ public class Player : MonoBehaviour
         _thrusterVisual.gameObject.SetActive(false);
     }
 
-    public void addPointsForEyeballDestroyed()
+    public void addPoints(int points)
     {
-        
-        _uIManager = FindObjectOfType<UIManager>()?.transform;
         
         if (_uIManager == null)
         {
             Debug.LogError("UI Manager not found in scene!");
         }
         
-        UIManager uIManager = _uIManager.GetComponent<UIManager>();
-
-        if(uIManager == null)
-        {
-            Debug.Log("UI Manager component not found!");
-            return;
-        }
-        
-        _score += _pointsForKillingEyeball;
-        uIManager.UpdateScore(_score);
+        _score += points;
+        _uIManager.UpdateScore(_score);
     }
 
     

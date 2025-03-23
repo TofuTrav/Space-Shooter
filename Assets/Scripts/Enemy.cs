@@ -11,13 +11,21 @@ public class Enemy : MonoBehaviour
     private float _topBounds = 7.3f;
     [SerializeField]
     private Vector2 _spawnRange;
-    [SerializeField]
-    private Transform _player;
+    //[SerializeField]
+    //private Transform _player;
+    private Player _player;
 
     [Header("Enemies")]
     [SerializeField]
-    private EnemyID _enemyID; 
+    private EnemyID _enemyID;
+    [SerializeField]
+    private int _eyeballPointValue = 10;
 
+    void Start()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();  
+    }
+    
     void Update()
     {
         EnemyMovement();
@@ -39,11 +47,9 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Player")
         {   
-            Player player = other.transform.GetComponent<Player>();
-            
-            if(player != null)
+            if(_player != null)
             {
-                player.Damage();
+                _player.Damage();
             }
             
             Destroy(this.gameObject);
@@ -51,9 +57,7 @@ public class Enemy : MonoBehaviour
 
         if(other.tag == "Laser")
         {   
-            Player player = _player.transform.GetComponent<Player>();
-            
-            if(player == null)
+            if(_player == null)
             {
                 Debug.Log("i don't have the script!");
                 return;
@@ -64,7 +68,7 @@ public class Enemy : MonoBehaviour
             switch(_enemyID)
             {
                 case EnemyID.Eyeball:
-                player.addPointsForEyeballDestroyed();
+                _player.addPoints(_eyeballPointValue);
                 Destroy(this.gameObject);
                     break;
                 default:
